@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+   <head>
+      <title>Weather Prediction App</title>
+   </head>
+   <body>
+      <h1>Weather Prediction App</h1>
+      <p>Please enter the following information:</p>
+      <form action="{{ url_for('predict') }}" method="post">
+         {% for feature in df.columns[:-1] %} <!-- exclude the target column "rain" -->
+         <div>
+            <label for="{{ feature }}">{{ feature }}:</label>
+            <input type="number" step="0.01" name="{{ feature }}" id="{{ feature }}" required>
+         </div>
+         {% endfor %}
+         <br>
+         <button type="submit">Predict</button>
+      </form>
+      {% if prediction_text %}
+      <p>{{ prediction_text }}</p>
+      {% endif %}
+   </body>
+</html>
